@@ -1,18 +1,15 @@
 # GTA Online Business Timers
 
-You need installed Python to work.
+Time is adjusted based on 1 player. \ Время настроено из расчета для 1 игрока.
 
-Для работы необходим установленный Python.
+
+You need installed Python to work. \ Для работы необходим установленный Python.
 
 [Python](https://www.python.org/)
 
 
-For all questions:
+For all questions: [Telegram](https://t.me/molovik)
 
-[Telegram](https://t.me/molovik)
-
-По всем повросам:
-
-[VK](https://vk.com/molovik96)
+По всем повросам: [VK](https://vk.com/molovik96)
 
 molovik | 2021
