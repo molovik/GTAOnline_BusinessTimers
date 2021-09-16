@@ -21,6 +21,10 @@ timer_club = False
 def reset_car1():
     global clock_car
     global timer_car
+    global car_in_garage
+    global car_ingarage
+    car_in_garage -= 1
+    car_ingarage['text'] = car_in_garage
     clock_car = 1200
     if timer_car == False:
         timer_car = True
@@ -28,6 +32,10 @@ def reset_car1():
 def reset_car2():
     global clock_car
     global timer_car
+    global car_in_garage
+    global car_ingarage
+    car_in_garage -= 2
+    car_ingarage['text'] = car_in_garage
     clock_car = 1800
     if timer_car == False:
         timer_car = True
@@ -35,6 +43,10 @@ def reset_car2():
 def reset_car3():
     global clock_car
     global timer_car
+    global car_in_garage
+    global car_ingarage
+    car_in_garage -= 3
+    car_ingarage['text'] = car_in_garage
     clock_car = 2400
     if timer_car == False:
         timer_car = True
@@ -42,6 +54,10 @@ def reset_car3():
 def reset_car4():
     global clock_car
     global timer_car
+    global car_in_garage
+    global car_ingarage
+    car_in_garage -= 4
+    car_ingarage['text'] = car_in_garage
     clock_car = 3000
     if timer_car == False:
         timer_car = True
@@ -81,7 +97,7 @@ def more_club():
     global clock_club
     global timer_club
     if clock_club < 72000:
-        clock_club = clock_club+3600
+        clock_club += 3600
     if timer_club == False:
         club_clock['text']=int(clock_club/720),"%"
 
@@ -95,7 +111,7 @@ def count_car():
             car_timer="готово"
         else:
             car_time_count=time.gmtime(clock_car)
-            car_time_time=time.strftime("%H:%M:%S",car_time_count)
+            car_time_time=time.strftime("%M:%S",car_time_count)
             car_timer=str(car_time_time)
         car_clock['text']=car_timer   # Или label.config (text = display)
         car_clock.after(1000, count_car) # задержка обновления таймера, в милисекундах
@@ -152,6 +168,15 @@ def count_club():
         clock_club += 1
 
 
+# количество машин в гараже
+car_in_garage = 0
+def stolen_car():
+    global car_in_garage
+    global car_ingarage
+    car_in_garage += 1
+    car_ingarage['text'] = car_in_garage
+
+
 okno = Tk()
 okno.title("GTAOnline_BusinessTimers")
 okno.geometry('320x350')
@@ -160,10 +185,12 @@ okno.geometry('320x350')
 # настройка элементов в окне
 car_name = Label(okno, text="продажа авто", fg="black", font="Verdana 15 bold")
 car_clock = Label(okno, text="готово", fg="black", font="Verdana 15 bold")
+car_ingarage = Label(okno, text=car_in_garage, fg="black", font="Verdana 15")
 car_sell_1 = Button(okno, text='одна', width=6, command=lambda:reset_car1())
 car_sell_2 = Button(okno, text='две', width=6, command=lambda:reset_car2())
 car_sell_3 = Button(okno, text='три', width=6, command=lambda:reset_car3())
 car_sell_4 = Button(okno, text='четыре', width=6, command=lambda:reset_car4())
+car_stolen = Button(okno, text='+1', width=3, command=lambda:stolen_car())
 bunker_name = Label(okno, text="сырье бункер", fg="black", font="Verdana 15 bold")
 bunker_clock = Label(okno, text="пусто", fg="black", font="Verdana 15 bold")
 bunker_suply = Button(okno, text='заполнено', width=15, command=lambda:reset_bunker())
@@ -176,17 +203,19 @@ meth_suply = Button(okno, text='заполнено', width=15, command=lambda:re
 club_name = Label(okno, text="товар в клубе", fg="black", font="Verdana 15 bold")
 club_clock = Label(okno, text="пусто", fg="black", font="Verdana 15 bold")
 club_sell = Button(okno, text='продать', width=15, command=lambda:reset_club())
-club_start = Button(okno, text='старт', width=6, command=lambda:start_club())
-club_more = Button(okno, text='+5%', width=6, command=lambda:more_club())
+club_start = Button(okno, text='старт', width=5, command=lambda:start_club())
+club_more = Button(okno, text='+5%', width=5, command=lambda:more_club())
 
 
 # настройка положения элементов в окне
 car_name.place(x=10, y=0)
-car_clock.place(x=200, y=0)
+car_clock.place(x=235, y=0)
+car_ingarage.place(x=185, y=0)
 car_sell_1.place(x=20, y=30)
 car_sell_2.place(x=80, y=30)
 car_sell_3.place(x=140, y=30)
 car_sell_4.place(x=200, y=30)
+car_stolen.place(x=270, y=30)
 bunker_name.place(x=10, y=70)
 bunker_clock.place(x=200, y=70)
 bunker_suply.place(x=20, y=100)
