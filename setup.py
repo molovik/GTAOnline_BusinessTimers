@@ -2,6 +2,10 @@ from tkinter import *
 import time
 
 
+# язык
+lang = ['пусто', 'готов', 'полон']
+
+
 # счетчики времени бизнеса
 clock_car = 0
 timer_car = False
@@ -87,7 +91,7 @@ def reset_club():
     global clock_club
     clock_club = 0
     if timer_club == False:
-        club_clock['text']="пусто"
+        club_clock['text']=lang[0]
 def start_club():
     global timer_club
     if timer_club == False:
@@ -108,7 +112,7 @@ def count_car():
     if timer_car == True:
         global clock_car
         if clock_car < 1:
-            car_timer="готово"
+            car_timer=lang[1]
         else:
             car_time_count=time.gmtime(clock_car)
             car_time_time=time.strftime("%M:%S",car_time_count)
@@ -121,7 +125,7 @@ def count_bunker():
     if timer_bunker == True:
         global clock_bunker
         if clock_bunker < 1:
-            bunker_timer="пусто"
+            bunker_timer=lang[0]
         else:
             bunker_time_count=time.gmtime(clock_bunker)
             bunker_time_time=time.strftime("%H:%M:%S",bunker_time_count)
@@ -134,7 +138,7 @@ def count_coke():
     if timer_coke == True:
         global clock_coke
         if clock_coke < 1:
-            coke_timer="пусто"
+            coke_timer=lang[0]
         else:
             coke_time_count=time.gmtime(clock_coke)
             coke_time_time=time.strftime("%H:%M:%S",coke_time_count)
@@ -147,7 +151,7 @@ def count_meth():
     if timer_meth == True:
         global clock_meth
         if clock_meth < 1:
-            meth_timer="пусто"
+            meth_timer=lang[0]
         else:
             meth_time_count=time.gmtime(clock_meth)
             meth_time_time=time.strftime("%H:%M:%S",meth_time_count)
@@ -160,7 +164,7 @@ def count_club():
     if timer_club == True:
         global clock_club
         if clock_club > 71999:
-            club_timer="полон"
+            club_timer=lang[2]
         else:
             club_timer=int(clock_club/720),"%"
         club_clock['text']=club_timer
@@ -177,14 +181,63 @@ def stolen_car():
     car_ingarage['text'] = car_in_garage
 
 
+# смена языка
+def chang_lang():
+    global lang
+    if lang_chang['text'] == 'eng':
+        car_name['text'] = "auto export"
+        car_clock['text'] = 'ready'
+        car_sell_1['text'] = 'one'
+        car_sell_2['text'] = 'two'
+        car_sell_3['text'] = 'three'
+        car_sell_4['text'] = 'four'
+        bunker_name['text'] = 'bunker suply'
+        bunker_clock['text'] = 'empty'
+        bunker_suply['text'] = 'full'
+        coke_name['text'] = 'coke suply'
+        coke_clock['text'] = 'empty'
+        coke_suply['text'] = 'full'
+        meth_name['text'] = 'meth suply'
+        meth_clock['text'] = 'empty'
+        meth_suply['text'] = 'full'
+        club_name['text'] = 'club'
+        club_clock['text'] = 'empty'
+        club_sell['text'] = 'sell'
+        club_start['text'] = 'start'
+        lang_chang['text'] = 'rus'
+        lang = ['empty', 'ready', 'full']
+    else:
+        car_name['text'] = 'продажа авто'
+        car_clock['text'] = 'готов'
+        car_sell_1['text'] = 'одна'
+        car_sell_2['text'] = 'две'
+        car_sell_3['text'] = 'три'
+        car_sell_4['text'] = 'четыре'
+        bunker_name['text'] = 'сырье бункер'
+        bunker_clock['text'] = 'пусто'
+        bunker_suply['text'] = 'полон'
+        coke_name['text'] = 'сырье кокаин'
+        coke_clock['text'] = 'пусто'
+        coke_suply['text'] = 'полон'
+        meth_name['text'] = 'сырье мет'
+        meth_clock['text'] = 'пусто'
+        meth_suply['text'] = 'полон'
+        club_name['text'] = 'товар в клубе'
+        club_clock['text'] = 'пусто'
+        club_sell['text'] = 'продать'
+        club_start['text'] = 'старт'
+        lang_chang['text'] = 'eng'
+        lang = ['пусто', 'готов', 'полон']
+
+
 okno = Tk()
 okno.title("GTAOnline_BusinessTimers")
-okno.geometry('320x350')
+okno.geometry('320x390')
 
 
 # настройка элементов в окне
 car_name = Label(okno, text="продажа авто", fg="black", font="Verdana 15 bold")
-car_clock = Label(okno, text="готово", fg="black", font="Verdana 15 bold")
+car_clock = Label(okno, text="готов", fg="black", font="Verdana 15 bold")
 car_ingarage = Label(okno, text=car_in_garage, fg="black", font="Verdana 15")
 car_sell_1 = Button(okno, text='одна', width=6, command=lambda:reset_car1())
 car_sell_2 = Button(okno, text='две', width=6, command=lambda:reset_car2())
@@ -205,6 +258,8 @@ club_clock = Label(okno, text="пусто", fg="black", font="Verdana 15 bold")
 club_sell = Button(okno, text='продать', width=15, command=lambda:reset_club())
 club_start = Button(okno, text='старт', width=5, command=lambda:start_club())
 club_more = Button(okno, text='+5%', width=5, command=lambda:more_club())
+credit = Label(okno, text="molovik | 2021", fg="black", font="Verdana 10 bold")
+lang_chang = Button(okno, text='eng', width=5, command=lambda:chang_lang())
 
 
 # настройка положения элементов в окне
@@ -230,6 +285,8 @@ club_clock.place(x=200, y=280)
 club_sell.place(x=20, y=310)
 club_start.place(x=190, y=310)
 club_more.place(x=250, y=310)
+credit.place(x=10, y=360)
+lang_chang.place(x=260, y=360)
 
 
 okno.mainloop()
